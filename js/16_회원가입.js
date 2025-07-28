@@ -53,7 +53,8 @@ inputPw.addEventListener("input", (e) => {
 
   if (valPw.trim().length == 0) {
     // 내부에 아무것도 작성 안한게 맞다면
-    pwResult.textContent = "영어 대/소문자 + 숫자 + 특수문자(!@#$%^&*) 포함 8~ 20글자 사이 작성하세요.";
+    pwResult.textContent =
+      "영어 대/소문자 + 숫자 + 특수문자(!@#$%^&*) 포함 8~ 20글자 사이 작성하세요.";
     e.target.value = "";
     pwResult.classList.remove("check", "error");
     checkList["inputPw"] = false;
@@ -82,7 +83,7 @@ function checkPw기능() {
   // trim() : 문자열 좌 우 에서 공백을 제거하는 메서드(함수=기능)
   const pwVal = inputPw.value.trim();
   const checkVal = inputPwCheck.value.trim();
-  
+
   //     0 이거나       또는   0 인게 둘 중하나라도 참이라면
   if (pwVal.length == 0 || checkVal.length == 0) {
     pwCheckResult.textContent = "비밀번호를 먼저 입력해주세요.";
@@ -142,13 +143,14 @@ inputName.addEventListener("input", (e) => {
   }
 });
 
-btn.addEventListener("click", (e) => {
+btn.addEventListener("submit", (e) => {
   // 모든 checkList 항목이 true 인지 확인하고 true가 아니라면 회원가입 불가!!!
   // true라면 회원가입 가능~
 
   if (checkList.inputId == false) {
     alert("아이디가 유효하지 않습니다.");
     inputId.focus();
+    e.preventDefault();
     return;
   }
 
@@ -156,18 +158,21 @@ btn.addEventListener("click", (e) => {
   if (checkList.inputPw == false) {
     alert("비밀번호가 유효하지 않습니다.");
     inputPw.focus();
+    e.preventDefault(); // 제출 방지
     return;
   }
 
   if (checkList.inputPwCheck == false) {
     alert("비밀번호 확인이 유효하지 않습니다.");
     inputPwCheck.focus();
+    e.preventDefault(); // 제출 방지
     return;
   }
 
   if (checkList.inputName == false) {
     alert("이름이 유효하지 않습니다.");
     inputName.focus();
+    e.preventDefault(); // 제출 방지
     return;
   }
 
@@ -176,6 +181,7 @@ btn.addEventListener("click", (e) => {
   const gender = document.querySelector("[name='gender']:checked");
   if (gender == null) {
     alert("성별을 선택해주세요.");
+    e.preventDefault(); // 제출 방지 button type 이 submit일 때 주로 사용
     return;
   }
   // 모든게 true이고 회원가입이 완료되면

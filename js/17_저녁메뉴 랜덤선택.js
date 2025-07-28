@@ -59,7 +59,7 @@ addBtn.addEventListener("click", function () {
   // 1번 빈 값 체크
   if (newMenu.length === 0) {
     validationMessage.textContent = "메뉴를 입력해주세요.";
-    validationMessage.className = "validation-message error";
+    validationMessage.className = " error";
     // input 창으로 focus 맞추기
     menuInput.focus();
     return; // return으로 되돌리기
@@ -73,7 +73,7 @@ addBtn.addEventListener("click", function () {
     // 만약에 문제가 존재할 경우
     validationMessage.textContent =
       "한글, 영어, 숫자만 포함해서 2~20글자로 입력해주세요.";
-    validationMessage.className = "validation-message error";
+    validationMessage.className = " error";
 
     // input 창으로 focus 맞추기
     menuInput.focus();
@@ -84,7 +84,9 @@ addBtn.addEventListener("click", function () {
   if (menus.includes(newMenu)) {
     // 메뉴 목록에 소비자가 작성한 메뉴 입력값이 존재하는게 맞다면
     validationMessage.textContent = "이미 존재하는 메뉴입니다.";
-    validationMessage.className = "validation-message error";
+    // className -> classList add remove 변경해서
+    // validation-message 와 그 뒤에 error 나 success 추가기능
+    validationMessage.className = " error";
     menuInput.focus();
     return; // displayMenus() 까지 가지 못하도록 기능 중단할 수 있도록 되돌리기
   }
@@ -93,7 +95,7 @@ addBtn.addEventListener("click", function () {
   menus.push(newMenu);
   menuInput.value = "";
   validationMessage.textContent = `${newMenu}메뉴가 추가되었습니다.`;
-  validationMessage.className = "validation-message success";
+  validationMessage.className = "success";
 
   // 추가된 메뉴를 다시 볼 수 있도록 displayMenu() 기능 호출
   displayMenus();
@@ -114,6 +116,7 @@ menuInput.addEventListener("keyup", (e) => {
   //만약에 Enter 키가 입력됐다면
   if (e.key === "Enter") {
     // 추가하기
+    addBtn.click(); //Enter 키 적용되도록 설정
   }
 });
 
