@@ -20,7 +20,6 @@ const pwCheckResult = document.getElementById("pwCheckResult");
 const nameResult = document.getElementById("nameResult");
 
 const regExpId = /^[A-Za-z0-9\-\_]{6,16}$/;
-
 const regExpName = /^[가-힣]{2,15}$/;
 const regExpPw = /^[A-Za-z\d!@#$%^&*]{8,20}$/;
 
@@ -54,8 +53,7 @@ inputPw.addEventListener("input", (e) => {
 
   if (valPw.trim().length == 0) {
     // 내부에 아무것도 작성 안한게 맞다면
-    pwResult.textContent =
-      "영어 대/소문자 + 숫자 + 특수문자(!@#$%^&*) 포함 8~ 20글자 사이 작성하세요.";
+    pwResult.textContent = "영어 대/소문자 + 숫자 + 특수문자(!@#$%^&*) 포함 8~ 20글자 사이 작성하세요.";
     e.target.value = "";
     pwResult.classList.remove("check", "error");
     checkList["inputPw"] = false;
@@ -84,12 +82,20 @@ function checkPw기능() {
   // trim() : 문자열 좌 우 에서 공백을 제거하는 메서드(함수=기능)
   const pwVal = inputPw.value.trim();
   const checkVal = inputPwCheck.value.trim();
+  
   //     0 이거나       또는   0 인게 둘 중하나라도 참이라면
   if (pwVal.length == 0 || checkVal.length == 0) {
     pwCheckResult.textContent = "비밀번호를 먼저 입력해주세요.";
     //  pwCheckResult.style.background = "배경색"; 2순위 형식의 style css
     //  pwCheckResult 곳에 class 명칭을 추가하거나 제거하겠다. 4순위 style css
     //  태그 명칭 옆에 class 명칭을 지우겠다.  check 와 error 제거하겠다.
+    pwCheckResult.classList.remove("check", "error");
+    checkList["inputPwCheck"] = false;
+    return;
+  }
+
+  if (!regExpPw.test(pwVal)) {
+    pwCheckResult.textContent = "올바른 비밀번호를 먼저 입력해주세요.";
     pwCheckResult.classList.remove("check", "error");
     checkList["inputPwCheck"] = false;
     return;
