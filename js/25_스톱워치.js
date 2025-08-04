@@ -82,16 +82,11 @@ resetBtn.addEventListener("click", () => {
 });
 
 
-/* record 클릭 시 
+recordBtn.addEventListener("click", () => {
+  const li = document.createElement("li");
 
+  // li 요소의 내용으로 #display 에 출력된 시간을 가져와 추가
+  li.innerText = display.innerText;
 
-const li = document.createElement("li");
-
-li.innerText = display.innerText;
-
-#recordContainer 의 첫 번째 자식으로 li 추가
-
-append()
-
-
-*/
+  recordContainer.prepend(li);
+});
